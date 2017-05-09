@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.flexbox.FlexboxLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:alignItems="center"
+    app:flexWrap="wrap"
+    app:justifyContent="space_around"
+    android:id="@+id/poster_main"
+    android:background="@color/colorAccent">
+
+    <ImageView
+        android:id="@+id/pic1"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:padding="1dp"
+        app:layout_flexBasisPercent="@fraction/poster_main"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:contentDescription="@string/app_name" />
+    <ImageView
+        android:id="@+id/pic2"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:padding="1dp"
+        app:layout_flexBasisPercent="@fraction/poster_main"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:contentDescription="@string/app_name"/>
+    <ImageView
+        android:id="@+id/pic3"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:padding="1dp"
+        app:layout_flexBasisPercent="@fraction/poster_main"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:contentDescription="@string/app_name"/>
+
+    <ImageView
+        android:id="@+id/pic4"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:padding="1dp"
+        app:layout_flexBasisPercent="@fraction/poster_main"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:contentDescription="@string/app_name"/>
+
+</com.google.android.flexbox.FlexboxLayout>
