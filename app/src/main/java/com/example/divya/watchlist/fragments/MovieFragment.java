@@ -156,14 +156,14 @@ public class MovieFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_movies,container,false);
-        pic1 = (ImageView) view.findViewById(R.id.pic1);
-        pic2 = (ImageView) view.findViewById(R.id.pic2);
-        pic3 = (ImageView) view.findViewById(R.id.pic3);
-        pic4 = (ImageView) view.findViewById(R.id.pic4);
+        pic1 = (ImageView) view.findViewById(R.id.pic);
+       // pic2 = (ImageView) view.findViewById(R.id.pic);
+       // pic3 = (ImageView) view.findViewById(R.id.pic3);
+       // pic4 = (ImageView) view.findViewById(R.id.pic4);
 
         Glide.with(getActivity()).load("https://image.tmdb.org/t/p/w185//aJn9XeesqsrSLKcHfHP4u5985hn.jpg")
                 .into(pic1);
-        Glide.with(getActivity()).load("https://image.tmdb.org/t/p/w185//aJn9XeesqsrSLKcHfHP4u5985hn.jpg")
+      /*  Glide.with(getActivity()).load("https://image.tmdb.org/t/p/w185//aJn9XeesqsrSLKcHfHP4u5985hn.jpg")
                 .into(pic2);
 
         Glide.with(getActivity()).load("https://image.tmdb.org/t/p/w185//aJn9XeesqsrSLKcHfHP4u5985hn.jpg")
@@ -171,6 +171,8 @@ public class MovieFragment extends Fragment {
 
         Glide.with(getActivity()).load("https://image.tmdb.org/t/p/w185//aJn9XeesqsrSLKcHfHP4u5985hn.jpg")
                 .into(pic4);
+                */
+
 
 
 
