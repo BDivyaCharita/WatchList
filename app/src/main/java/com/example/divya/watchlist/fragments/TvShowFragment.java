@@ -46,6 +46,8 @@ public class TvShowFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private List<Movie> movieList;
+    private List<Movie> list;
+
 
     private int mPage;
 
@@ -134,4 +136,5 @@ public class TvShowFragment extends Fragment {
         m = new Movie("5");
         movieList.add(m);
     }
+
 }

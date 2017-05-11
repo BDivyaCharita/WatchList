@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,16 +20,28 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.Request;
 import com.example.divya.watchlist.R;
 import com.example.divya.watchlist.adapters.MovieAdapter;
+import com.example.divya.watchlist.extras.Keys;
 import com.example.divya.watchlist.model.Movie;
 import com.example.divya.watchlist.network.VolleySingleton;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.divya.watchlist.extras.Keys.KeysMovies.*;
+
+import static com.example.divya.watchlist.extras.Keys.KeysMovies.KEY_BACKDROP_PATH;
+import static com.example.divya.watchlist.extras.Keys.KeysMovies.KEY_ID;
+import static com.example.divya.watchlist.extras.Keys.KeysMovies.KEY_OVERVIEW;
+import static com.example.divya.watchlist.extras.Keys.KeysMovies.KEY_POSTER_PATH;
+import static com.example.divya.watchlist.extras.Keys.KeysMovies.KEY_RESULTS;
 
 /**
  * Created by Divya on 07-05-2017.
@@ -43,13 +56,15 @@ public class MovieFragment extends Fragment {
     private  VolleySingleton volleySingleton;
     private ImageLoader imageLoader;
     private  RequestQueue requestQueue;
+    private ImageView pic1, pic2, pic3, pic4;
 
     private String mParam1;
     private String mParam2;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private List<Movie> movieList;
+    private ArrayList<Movie> movieList = new ArrayList<>();
+    private List<Movie> list;
 
 
     private int mPage;
@@ -75,11 +90,15 @@ public class MovieFragment extends Fragment {
 
         volleySingleton = VolleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
+
+        sendJSONRequest();
+        }
+
+    private void sendJSONRequest() {
         JsonObjectRequest request = new JsonObjectRequest(com.android.volley.Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.e("Response", response.toString());
-                Toast.makeText(getActivity(), response.toString(), Toast.LENGTH_SHORT).show();
+                parseSONResponse(response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -88,30 +107,74 @@ public class MovieFragment extends Fragment {
             }
         });
         requestQueue.add(request);
+
     }
 
+    private void parseSONResponse(JSONObject response) {
+        if (response == null || response.length() == 0) {
+            return;
+        }
+        try {
+            //StringBuilder data = new StringBuilder();
+            if(response.has(KEY_RESULTS)) {
+                JSONArray arrayMovies = response.getJSONArray(KEY_RESULTS);
+                for (int i = 0; i < arrayMovies.length() ; i++) {
+                    JSONObject currentMovie = arrayMovies.getJSONObject(i);
+                    String id = currentMovie.getString(KEY_ID);
+
+                    String overview = currentMovie.getString(KEY_OVERVIEW);
+
+                    String poster_path = currentMovie.getString(KEY_POSTER_PATH);
+                    String backdrop_path = currentMovie.getString(KEY_BACKDROP_PATH);
+                   // data.append(id+"\n");
+
+                   Movie movie = new Movie();
+                    //(id, overview,poster_path,backdrop_path);
+                    movie.setId(id);
+                    movie.setOverview(overview);
+                    movie.setPoster_path(poster_path);
+                    movie.setBackdrop_path(backdrop_path);
+                    Log.e("Overview", overview);
+
+
+                    movieList.add(movie);
+
+                }
+                Log.e("JSON FEED", movieList.toString());
+
+                Toast.makeText(getActivity(), movieList.toString(), Toast.LENGTH_SHORT).show();
+
+                // Log.e("TEST_JSON", data.toString());
+            }
+        }catch (JSONException e){
+
+        }
+
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_movies,container,false);
+        pic1 = (ImageView) view.findViewById(R.id.pic1);
+        pic2 = (ImageView) view.findViewById(R.id.pic2);
+        pic3 = (ImageView) view.findViewById(R.id.pic3);
+        pic4 = (ImageView) view.findViewById(R.id.pic4);
 
-       /*RequestQueue requestQueue = VolleySingleton.getInstance().getRequestQueue();
+        Glide.with(getActivity()).load("https://image.tmdb.org/t/p/w185//aJn9XeesqsrSLKcHfHP4u5985hn.jpg")
+                .into(pic1);
+        Glide.with(getActivity()).load("https://image.tmdb.org/t/p/w185//aJn9XeesqsrSLKcHfHP4u5985hn.jpg")
+                .into(pic2);
 
-        StringRequest request = new StringRequest(com.android.volley.Request.Method.GET, "https://api.themoviedb.org/3/movie/popular?api_key=6b7085c6deee4086616c8dae1c1ada12", new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(getActivity(), "RESPONSE" + response, Toast.LENGTH_SHORT).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "ERROR" +error, Toast.LENGTH_SHORT).show();
-            }
-        });
-        requestQueue.add(request);
-        */
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        Glide.with(getActivity()).load("https://image.tmdb.org/t/p/w185//aJn9XeesqsrSLKcHfHP4u5985hn.jpg")
+                .into(pic3);
+
+        Glide.with(getActivity()).load("https://image.tmdb.org/t/p/w185//aJn9XeesqsrSLKcHfHP4u5985hn.jpg")
+                .into(pic4);
+
+
+
+     /*   mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
 
         movieList = new ArrayList<>();
         mAdapter = new MovieAdapter(this.getActivity(), movieList);
@@ -121,6 +184,7 @@ public class MovieFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
 
         prepareAlbums();
+    */
         return view;
     }
 
@@ -136,4 +200,5 @@ public class MovieFragment extends Fragment {
         m = new Movie("5");
         movieList.add(m);
     }
+
 }

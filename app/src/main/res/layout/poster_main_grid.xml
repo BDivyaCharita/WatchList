@@ -7,8 +7,7 @@
     app:alignItems="center"
     app:flexWrap="wrap"
     app:justifyContent="space_around"
-    android:id="@+id/poster_main"
-    android:background="@color/colorAccent">
+    android:id="@+id/poster_main">
 
     <ImageView
         android:id="@+id/pic1"

@@ -20,6 +20,13 @@ public class Movie {
 
     public Movie(String title){
         this.title = title;
+    }
+
+    public Movie(String id,String overview,String poster_path,String backdrop_path){
+        this.id = id;
+        this.overview=overview;
+        this.poster_path = poster_path;
+        this.backdrop_path = backdrop_path;
 
     }
 
@@ -93,5 +100,14 @@ public class Movie {
 
     public void setVote_average(String vote_average) {
         this.vote_average = vote_average;
+    }
+
+
+    @Override
+    public String toString() {
+        return "ID: "+id+
+                "OVERVIEW: " +overview+
+                "POSTER: " +poster_path+
+                "BACKDROP: " +backdrop_path;
     }
 }
