@@ -190,17 +190,5 @@ public class MovieFragment extends Fragment {
         return view;
     }
 
-    private void prepareAlbums() {
-        Movie m = new Movie("1");
-        movieList.add(m);
-        m = new Movie("2");
-        movieList.add(m);
-        m = new Movie("3");
-        movieList.add(m);
-        m = new Movie("4");
-        movieList.add(m);
-        m = new Movie("5");
-        movieList.add(m);
-    }
 
 }

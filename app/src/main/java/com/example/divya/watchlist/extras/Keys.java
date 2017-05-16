@@ -19,4 +19,15 @@ public interface Keys {
         public static final String KEY_VOTE_AVERAGE = "vote_average";
     }
 
+    public interface KeysPeople{
+
+        public static final String KEY_RESULTS = "results";
+        public static final String KEY_PROFILE_PATH= "profile_path";
+        public static final String KEY_ID = "id";
+        public static final String KEY_NAME = "name";
+        public static final String KEY_POPULARITY ="popularity";
+    }
+
+
+
 }

@@ -110,4 +110,5 @@ public class Movie {
                 "POSTER: " +poster_path+
                 "BACKDROP: " +backdrop_path;
     }
+
 }
